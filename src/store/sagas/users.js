@@ -7,7 +7,9 @@ import {
   logInSuccess,
   logInFailure,
   checkAuthorizationSuccess,
-  checkAuthorizationFailure
+  checkAuthorizationFailure,
+  logOutSuccess,
+  logOutFailure
 } from '../actions/users';
 import { hideSpin, showSpin } from '../actions/spinner';
 
@@ -42,4 +44,14 @@ export function* checkAuthorization() {
     } catch (error) {
       yield put(checkAuthorizationFailure(error));
     }
+};
+
+export function* logOut() {
+  try {
+    localStorage.clear();
+    yield put(logOutSuccess());
+    Message('success', 'Вы успешно вышли!')
+  } catch (error) {
+    yield put(logOutFailure(error));
+  };
 };
