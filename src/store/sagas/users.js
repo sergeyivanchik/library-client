@@ -7,7 +7,9 @@ import {
   logInSuccess,
   logInFailure,
   checkAuthorizationSuccess,
-  checkAuthorizationFailure
+  checkAuthorizationFailure,
+  logOutSuccess,
+  logOutFailure
 } from '../actions/users';
 import { hideSpin, showSpin } from '../actions/spinner';
 
@@ -17,15 +19,15 @@ export function* logIn({ payload }) {
     yield put(showSpin());
 
     const { data } = yield call(() => axios.post('users/login', { ...payload }));
-    const { token } = data;
+    const { id, token, username } = data;
 
     if (token) {
       localStorage.setItem('token', token);
+      yield put(logInSuccess({ id, username }));
     } else Message('error', 'Token not found!');
 
-    yield put(logInSuccess());
     yield put(hideSpin());
-    Message('success', 'Вы успешно вошли!')
+    Message('success', 'Вы успешно вошли!');
   } catch (error) {
     yield put(hideSpin());
     yield put(logInFailure(error));
@@ -42,4 +44,14 @@ export function* checkAuthorization() {
     } catch (error) {
       yield put(checkAuthorizationFailure(error));
     }
+};
+
+export function* logOut() {
+  try {
+    localStorage.clear();
+    yield put(logOutSuccess());
+    Message('success', 'Вы успешно вышли!')
+  } catch (error) {
+    yield put(logOutFailure(error));
+  };
 };

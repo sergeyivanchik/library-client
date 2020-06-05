@@ -12,7 +12,11 @@ import {
   GET_CURRENT_AUTHOR
 } from '../consts/authors';
 import { SET_CURRENT_NUMBER } from '../consts/pagination';
-import { LOG_IN, CHECK_AUTHORIZATION } from '../consts/users'
+import {
+  LOG_IN,
+  CHECK_AUTHORIZATION,
+  LOG_OUT
+} from '../consts/users'
 
 import {
   getBooks,
@@ -26,7 +30,11 @@ import {
   getCurrentAuthor
 } from './authors';
 import { setCurrentNumber } from './pagination';
-import { logIn, checkAuthorization } from './users';
+import {
+  logIn,
+  checkAuthorization,
+  logOut
+} from './users';
 
 
 function* watchBooks() {
@@ -48,7 +56,8 @@ function* watchPagination() {
 
 function* watchUsers() {
   yield takeEvery(LOG_IN, logIn);
-  yield takeEvery(CHECK_AUTHORIZATION, checkAuthorization)
+  yield takeEvery(CHECK_AUTHORIZATION, checkAuthorization);
+  yield takeEvery(LOG_OUT, logOut);
 };
 
 export default function* rootSaga() {

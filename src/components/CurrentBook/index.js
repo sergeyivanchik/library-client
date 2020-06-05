@@ -7,7 +7,7 @@ import Line from './Line';
 import Mark from './Mark';
 import Spinner from '../Spinner';
 
-import { getCurrentBookAsync } from '../../store/actions/books';
+import { getCurrentBookAsync, checkBookAsync } from '../../store/actions/books';
 
 
 const CurrentBook = ({ match: { params : { bookId } } }) => {
@@ -17,6 +17,7 @@ const CurrentBook = ({ match: { params : { bookId } } }) => {
 
   useEffect(() => {
     dispatch(getCurrentBookAsync(bookId));
+    dispatch(checkBookAsync({ bookId, userId: '5ed8e4696111d53bb45469d3' }))
   }, [dispatch, bookId]);
 
   return (
