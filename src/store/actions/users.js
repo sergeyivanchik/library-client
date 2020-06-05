@@ -10,8 +10,9 @@ import {
   LOG_OUT
 } from '../consts/users';
 
-export const logInSuccess = () => ({
-  type: LOG_IN_SUCCESS
+export const logInSuccess = data => ({
+  type: LOG_IN_SUCCESS,
+  payload: data
 });
 
 export const logInFailure = error => ({

@@ -8,7 +8,6 @@ import {
   logInFailure,
   checkAuthorizationSuccess,
   checkAuthorizationFailure,
-  checkAuthorizationAsync,
   logOutSuccess,
   logOutFailure
 } from '../actions/users';
@@ -20,16 +19,15 @@ export function* logIn({ payload }) {
     yield put(showSpin());
 
     const { data } = yield call(() => axios.post('users/login', { ...payload }));
-    const { token } = data;
+    const { id, token, username } = data;
 
     if (token) {
       localStorage.setItem('token', token);
-      yield put(logInSuccess());
+      yield put(logInSuccess({ id, username }));
     } else Message('error', 'Token not found!');
 
-    yield put(checkAuthorizationAsync());
-    // yield put(hideSpin());
-    // Message('success', 'Вы успешно вошли!');
+    yield put(hideSpin());
+    Message('success', 'Вы успешно вошли!');
   } catch (error) {
     yield put(hideSpin());
     yield put(logInFailure(error));
@@ -43,10 +41,7 @@ export function* checkAuthorization() {
       const { data } = yield call(() => axios.post('users/checkUser'));
 
       yield put(checkAuthorizationSuccess(data));
-      yield put(hideSpin());
-      Message('success', 'Вы успешно вошли!');
     } catch (error) {
-      yield put(hideSpin());
       yield put(checkAuthorizationFailure(error));
     }
 };

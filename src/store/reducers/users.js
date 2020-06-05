@@ -15,7 +15,7 @@ const initialState = {
 const users = (state = initialState, action) => {
   switch(action.type) {
     case LOG_IN_SUCCESS:
-      return { ...state };
+      return { ...state, currentUser: action.payload };
 
     case LOG_IN_FAILURE:
       return { ...state, error: action.payload };
@@ -24,10 +24,10 @@ const users = (state = initialState, action) => {
         return { ...state, currentUser: action.payload };
 
     case CHECK_AUTHORIZATION_FAILURE:
-        return { ...state, error: action.payload, currentUser: null };
+        return { ...state, error: action.payload };
 
     case LOG_OUT_SUCCESS:
-      return { ...state };
+      return { ...state, currentUser: null };
 
     case LOG_OUT_FAILURE:
       return { ...state, error: action.payload };
