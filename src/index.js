@@ -1,12 +1,31 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { createStore, applyMiddleware } from 'redux';
+import { Provider } from 'react-redux';
+import { composeWithDevTools } from 'redux-devtools-extension';
+import createSagaMiddleware from 'redux-saga';
+import axios from 'axios';
+
 import './index.css';
+import 'antd/dist/antd.css';
+
 import App from './App';
+
 import * as serviceWorker from './serviceWorker';
+import rootReducer from './store/reducers';
+import rootSaga from './store/sagas';
+
+axios.defaults.baseURL = 'http://localhost:8080/';
+const saga = createSagaMiddleware()
+const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(saga)));
+saga.run(rootSaga);
+
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Provider store={store}>
+      <App />
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );
