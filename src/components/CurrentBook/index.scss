@@ -1,0 +1,33 @@
+.current-book {
+  display: flex;
+  flex-direction: column;
+
+  &__top {
+    display: flex;
+    flex-direction: row;
+  }
+
+  &__bottom {
+    margin-top: 10px;
+  }
+
+  &__info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  &__poster {
+    width: 180px;
+    height: 280px;
+    margin-right: 15px;
+  }
+
+  &__story {
+    text-indent: 20px;
+    color: black;
+    margin-top: 20px;
+    font-size: 15px;
+    text-align: justify;
+  }
+}
