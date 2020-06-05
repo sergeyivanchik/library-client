@@ -6,17 +6,26 @@ import './user.scss';
 import login from '../../img/login.png';
 import user from '../../img/user.png';
 
-import { logInAsync } from '../../store/actions/users';
+import {
+  logInAsync,
+  logOut,
+  checkAuthorizationAsync
+} from '../../store/actions/users';
 
 
 const User = () => {
   const dispatch = useDispatch();
   const isAuthorized = useSelector(store => !!store.users.currentUser);
 
-  const handleLoginClick = () =>
-    !isAuthorized
-      ? dispatch(logInAsync({ username: 'Admin', password: '9874123' }))
-      : console.log(isAuthorized)
+  const handleLoginClick = () => {
+    if (!isAuthorized) {
+      dispatch(logInAsync({ username: 'Admin', password: '9874123' }));
+    } else {
+      dispatch(logOut());
+    };
+
+    dispatch(checkAuthorizationAsync());
+  };
 
   return (
     <img
