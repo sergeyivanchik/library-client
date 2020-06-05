@@ -24,12 +24,12 @@ export function* logIn({ payload }) {
 
     if (token) {
       localStorage.setItem('token', token);
-      yield put(checkAuthorizationAsync());
       yield put(logInSuccess());
     } else Message('error', 'Token not found!');
 
-    yield put(hideSpin());
-    Message('success', 'Вы успешно вошли!')
+    yield put(checkAuthorizationAsync());
+    // yield put(hideSpin());
+    // Message('success', 'Вы успешно вошли!');
   } catch (error) {
     yield put(hideSpin());
     yield put(logInFailure(error));
@@ -43,7 +43,10 @@ export function* checkAuthorization() {
       const { data } = yield call(() => axios.post('users/checkUser'));
 
       yield put(checkAuthorizationSuccess(data));
+      yield put(hideSpin());
+      Message('success', 'Вы успешно вошли!');
     } catch (error) {
+      yield put(hideSpin());
       yield put(checkAuthorizationFailure(error));
     }
 };
