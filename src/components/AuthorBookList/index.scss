@@ -1,0 +1,27 @@
+.author-book-list {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  overflow: auto;
+
+  .author-book {
+
+    &:nth-child(1) {
+      margin-left: 0;
+    }
+
+    &:nth-last-child(1) {
+      margin-right: 0;
+    }
+  }
+
+  &::-webkit-scrollbar {
+    background-color: transparent;
+    width: 2px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: #1890ff;
+    border-radius: 5px;
+  }
+}
