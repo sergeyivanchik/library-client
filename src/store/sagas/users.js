@@ -8,6 +8,7 @@ import {
   logInFailure,
   checkAuthorizationSuccess,
   checkAuthorizationFailure,
+  checkAuthorizationAsync,
   logOutSuccess,
   logOutFailure
 } from '../actions/users';
@@ -23,9 +24,10 @@ export function* logIn({ payload }) {
 
     if (token) {
       localStorage.setItem('token', token);
+      yield put(checkAuthorizationAsync());
+      yield put(logInSuccess());
     } else Message('error', 'Token not found!');
 
-    yield put(logInSuccess());
     yield put(hideSpin());
     Message('success', 'Вы успешно вошли!')
   } catch (error) {
@@ -49,6 +51,7 @@ export function* checkAuthorization() {
 export function* logOut() {
   try {
     localStorage.clear();
+    yield put(checkAuthorizationFailure(''));
     yield put(logOutSuccess());
     Message('success', 'Вы успешно вышли!')
   } catch (error) {

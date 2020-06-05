@@ -8,8 +8,7 @@ import user from '../../img/user.png';
 
 import {
   logInAsync,
-  logOut,
-  checkAuthorizationAsync
+  logOut
 } from '../../store/actions/users';
 
 
@@ -23,8 +22,6 @@ const User = () => {
     } else {
       dispatch(logOut());
     };
-
-    dispatch(checkAuthorizationAsync());
   };
 
   return (
