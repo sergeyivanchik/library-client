@@ -1,25 +1,33 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect } from 'react';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { useDispatch } from  'react-redux';
 
-function App() {
+import CurrentBook from './components/CurrentBook';
+import CurrentAuthor from './components/CurrentAuthor';
+import MainPage from './components/MainPage';
+
+import { logInAsync, checkAuthorizationAsync } from './store/actions/users';
+
+
+const App = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+
+    token
+      ? dispatch(checkAuthorizationAsync())
+      : dispatch(logInAsync({ username: 'Admin', password: '9874123' }));
+  }, [dispatch]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div className="router">
+        <Route exact path='/' component={MainPage}/>
+        <Route path="/book/:bookId" component={CurrentBook}/>
+        <Route path="/author/:authorId" component={CurrentAuthor}/>
+      </div>
+    </Router>
   );
 }
 
