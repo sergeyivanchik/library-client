@@ -4,7 +4,10 @@ import {
   LOG_IN,
   CHECK_AUTHORIZATION_SUCCESS,
   CHECK_AUTHORIZATION_FAILURE,
-  CHECK_AUTHORIZATION
+  CHECK_AUTHORIZATION,
+  LOG_OUT_SUCCESS,
+  LOG_OUT_FAILURE,
+  LOG_OUT
 } from '../consts/users';
 
 export const logInSuccess = () => ({
@@ -33,4 +36,17 @@ export const checkAuthorizationFailure = error => ({
 
 export const checkAuthorizationAsync = () => ({
   type: CHECK_AUTHORIZATION
+});
+
+export const logOutSuccess = () => ({
+  type: LOG_OUT_SUCCESS
+});
+
+export const logOutFailure = error => ({
+  type: LOG_OUT_FAILURE,
+  payload: error
+});
+
+export const logOut = () => ({
+  type: LOG_OUT
 });
