@@ -49,7 +49,6 @@ export function* checkAuthorization() {
 export function* logOut() {
   try {
     localStorage.clear();
-    yield put(checkAuthorizationFailure(''));
     yield put(logOutSuccess());
     Message('success', 'Вы успешно вышли!')
   } catch (error) {

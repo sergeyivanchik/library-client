@@ -24,7 +24,7 @@ const users = (state = initialState, action) => {
         return { ...state, currentUser: action.payload };
 
     case CHECK_AUTHORIZATION_FAILURE:
-        return { ...state, error: action.payload };
+        return { ...state, error: action.payload, currentUser: null };
 
     case LOG_OUT_SUCCESS:
       return { ...state, currentUser: null };

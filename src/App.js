@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-import { useSelector } from  'react-redux';
+import { useSelector, useDispatch } from  'react-redux';
 
 import './App.scss';
 
@@ -9,9 +9,16 @@ import CurrentAuthor from './components/CurrentAuthor';
 import MainPage from './components/MainPage';
 import Header from './components/Header';
 
+import { checkAuthorizationAsync } from './store/actions/users';
+
 
 const App = () => {
+  const dispatch = useDispatch();
   const isShowSpinner = useSelector(store => store.spinner.show);
+
+  useEffect(() => {
+    dispatch(checkAuthorizationAsync());
+  });
 
   return (
     <Router>
