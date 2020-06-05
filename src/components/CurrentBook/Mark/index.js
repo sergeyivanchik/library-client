@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from  'react-redux';
 
 import './index.scss';
@@ -9,16 +9,12 @@ import { Popover } from 'antd';
 
 import PopoverContent from '../../PopoverContent';
 
-import { selectBookAsync, checkBookAsync } from '../../../store/actions/books';
+import { selectBookAsync } from '../../../store/actions/books';
 
 
 const Mark = ({ bookId }) => {
   const dispatch = useDispatch();
   const isChecked = useSelector(store => store.books.isChecked);
-
-  useEffect(() => {
-    dispatch(checkBookAsync({ bookId, userId: '5ed8e4696111d53bb45469d3' }))
-  }, [dispatch, bookId]);
 
   return (
     <Popover content={<PopoverContent title={isChecked ? "Удалить" : "Добавить"}/>}>
