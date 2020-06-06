@@ -8,6 +8,7 @@ import CurrentBook from './components/CurrentBook';
 import CurrentAuthor from './components/CurrentAuthor';
 import MainPage from './components/MainPage';
 import Header from './components/Header';
+import Form from './components/Form';
 
 import { checkAuthorizationAsync } from './store/actions/users';
 
@@ -15,6 +16,7 @@ import { checkAuthorizationAsync } from './store/actions/users';
 const App = () => {
   const dispatch = useDispatch();
   const isShowSpinner = useSelector(store => store.spinner.show);
+  const isShowLoginForm = useSelector(store => store.forms.showLoginForm);
 
   useEffect(() => {
     dispatch(checkAuthorizationAsync());
@@ -32,6 +34,8 @@ const App = () => {
           <Route path="/book/:bookId" component={CurrentBook}/>
           <Route path="/author/:authorId" component={CurrentAuthor}/>
         </div>
+
+        <Form isShow={isShowLoginForm}/>
       </div>
     </Router>
   );

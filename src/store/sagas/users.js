@@ -12,6 +12,7 @@ import {
   logOutFailure
 } from '../actions/users';
 import { hideSpin, showSpin } from '../actions/spinner';
+import { hideLoginForm } from '../actions/forms';
 
 
 export function* logIn({ payload }) {
@@ -26,11 +27,13 @@ export function* logIn({ payload }) {
       yield put(logInSuccess({ id, username }));
     } else Message('error', 'Token not found!');
 
+    yield put(hideLoginForm());
     yield put(hideSpin());
     Message('success', 'Вы успешно вошли!');
   } catch (error) {
     yield put(hideSpin());
     yield put(logInFailure(error));
+    Message('error', 'Введены некоректные данные!');
   };
 };
 

@@ -6,10 +6,8 @@ import './user.scss';
 import login from '../../img/login.png';
 import user from '../../img/user.png';
 
-import {
-  logInAsync,
-  logOut
-} from '../../store/actions/users';
+import { logOut } from '../../store/actions/users';
+import { showLoginForm } from '../../store/actions/forms';
 
 
 const User = () => {
@@ -18,7 +16,7 @@ const User = () => {
 
   const handleLoginClick = () => {
     if (!isAuthorized) {
-      dispatch(logInAsync({ username: 'Admin', password: '9874123' }));
+      dispatch(showLoginForm());
     } else {
       dispatch(logOut());
     };
