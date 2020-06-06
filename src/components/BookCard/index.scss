@@ -1,5 +1,9 @@
 .card {
-  margin:0 33.5px;
+  margin:0 25.22px;
+
+  // &:nth-child(n + 6) {
+  //   margin-top: 30px;
+  // }
 
   .ant-card {
     width: 240px;
@@ -7,6 +11,11 @@
 
   img {
     height: 350px;
+  }
+
+  .ant-card-meta-description {
+    white-space: nowrap;
+    text-overflow: ellipsis
   }
 }
 
