@@ -16,7 +16,7 @@ const BookCardList = ({ books }) => {
 
     return (
       allBooks &&
-      allBooks.length &&
+      !!allBooks.length &&
       allBooks.slice(beginIndex, endIndex)
     );
   }

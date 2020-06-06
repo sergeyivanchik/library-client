@@ -13,5 +13,3 @@ export const SELECT_BOOK = 'SELECT_BOOK';
 export const CHECK_BOOK_SUCCESS = 'CHECK_BOOK_SUCCESS';
 export const CHECK_BOOK_FAILURE = 'CHECK_BOOK_FAILURE';
 export const CHECK_BOOK = 'CHECK_BOOK';
-
-
