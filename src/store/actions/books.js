@@ -13,7 +13,8 @@ import {
   SELECT_BOOK,
   CHECK_BOOK_SUCCESS,
   CHECK_BOOK_FAILURE,
-  CHECK_BOOK
+  CHECK_BOOK,
+  SEARCH_BOOKS
 } from '../consts/books';
 
 
@@ -89,4 +90,9 @@ export const checkBookFailure = error => ({
 export const checkBookAsync = info => ({
   type: CHECK_BOOK,
   payload: info
+});
+
+export const searchBooks = data => ({
+  type: SEARCH_BOOKS,
+  payload: data
 });

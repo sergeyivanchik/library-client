@@ -6,11 +6,17 @@ import './index.scss';
 import BookCardList from '../BookCardList';
 import BooksPagination from '../BooksPagination';
 import Spinner from '../Spinner';
+import SearchBar from '../SearchBar';
 
 import { getBooksAsync } from '../../store/actions/books';
 
 
-const MainPage = ({ books, getBooksAsync, showSpinner }) => {
+const MainPage = ({
+  books,
+  getBooksAsync,
+  showSpinner,
+  foundedBooks
+}) => {
   useEffect(() => {
     getBooksAsync();
   }, [getBooksAsync]);
@@ -21,7 +27,8 @@ const MainPage = ({ books, getBooksAsync, showSpinner }) => {
         showSpinner
           ? <Spinner/>
           : <>
-              <BookCardList books={books}/>
+              <SearchBar books={books}/>
+              <BookCardList books={foundedBooks && !!foundedBooks.length ? foundedBooks : books}/>
               <BooksPagination/>
             </>
       }
@@ -31,6 +38,7 @@ const MainPage = ({ books, getBooksAsync, showSpinner }) => {
 
 const mapStateToProps = store => ({
   books: store.books.bookList,
+  foundedBooks: store.books.foundedBooks,
   showSpinner: store.spinner.show
 });
 
