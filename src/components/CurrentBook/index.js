@@ -14,11 +14,12 @@ const CurrentBook = ({ match: { params : { bookId } } }) => {
   const dispatch = useDispatch();
   const currentBook = useSelector(store => store.books.currentBook);
   const showSpinner = useSelector(store => store.spinner.show);
+  const currentUser = useSelector(store => store.users.currentUser);
 
   useEffect(() => {
     dispatch(getCurrentBookAsync(bookId));
-    dispatch(checkBookAsync({ bookId, userId: '5ed8e4696111d53bb45469d3' }))
-  }, [dispatch, bookId]);
+    dispatch(checkBookAsync({ bookId, userId: currentUser.id }))
+  }, [dispatch, bookId, currentUser.id]);
 
   return (
     <div className="current-book">
