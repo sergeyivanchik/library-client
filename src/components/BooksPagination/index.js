@@ -13,6 +13,7 @@ const BooksPagination = () => {
   const currentNumber = useSelector(store => store.pagination.currentNumber);
   const totalNumber = useSelector(store => store.pagination.totalNumber);
   const books = useSelector(store => store.books.bookList);
+  const foundedBooks = useSelector(store => store.books.foundedBooks);
 
   return (
     <div className='pagination'>
@@ -20,7 +21,7 @@ const BooksPagination = () => {
         defaultCurrent={1}
         current={currentNumber}
         pageSize={totalNumber}
-        total={books && books.length}
+        total={(foundedBooks && foundedBooks.length) || (books && books.length)}
         onChange={pageNumber => dispatch(setCurrentNumber(pageNumber))}
       />
     </div>
