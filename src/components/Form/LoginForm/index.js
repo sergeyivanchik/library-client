@@ -8,7 +8,7 @@ import { Button, Input } from 'antd';
 import Message from '../../Message';
 
 import { logInAsync } from '../../../store/actions/users';
-import { hideLoginForm } from '../../../store/actions/forms';
+import { hideLoginForm, showSignupForm } from '../../../store/actions/forms';
 
 
 const LoginForm = () => {
@@ -39,7 +39,10 @@ const LoginForm = () => {
   return (
     <div className="login-form">
       <div className="login-form__title">
-        Вход
+        <span>Авторизация</span>
+        <span onClick={() => dispatch(showSignupForm())}>
+          Регистрация
+        </span>
       </div>
 
       <Input

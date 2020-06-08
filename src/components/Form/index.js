@@ -5,16 +5,20 @@ import './index.scss';
 import { Modal } from 'antd';
 
 import LoginForm from './LoginForm';
+import SignupForm from './SignupForm';
 
 
-const Form = ({ isShow }) => {
+const Form = ({ isShowLoginForm, isShowSignupForm }) => {
   return (
     <Modal
-      visible={isShow}
+      visible={isShowLoginForm || isShowSignupForm}
       closable={false}
       footer={null}
     >
-      <LoginForm/>
+      {
+        (isShowLoginForm && <LoginForm/>) ||
+        (isShowSignupForm && <SignupForm/>)
+      }
     </Modal>
   );
 }
