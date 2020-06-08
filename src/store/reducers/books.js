@@ -8,11 +8,13 @@ import {
   SELECT_BOOK_SUCCESS,
   SELECT_BOOK_FAILURE,
   CHECK_BOOK_SUCCESS,
-  CHECK_BOOK_FAILURE
+  CHECK_BOOK_FAILURE,
+  SEARCH_BOOKS
 } from '../consts/books';
 
 const initialState = {
   bookList: [],
+  foundedBooks: [],
   currentBook: null,
   isChecked: false,
   error: ''
@@ -20,11 +22,11 @@ const initialState = {
 
 const books = (state = initialState, action) => {
   switch(action.type) {
-    case GET_BOOKS_SUCCESS:
-      return { ...state, bookList: action.payload };
+  case GET_BOOKS_SUCCESS:
+    return { ...state, bookList: action.payload };
 
-    case GET_BOOKS_FAILURE:
-      return { ...state, error: action.payload };
+  case GET_BOOKS_FAILURE:
+    return { ...state, error: action.payload };
 
   case GET_CURRENT_BOOK_SUCCESS:
     return { ...state, currentBook: action.payload };
@@ -45,12 +47,16 @@ const books = (state = initialState, action) => {
     return { ...state, error: action.payload };
 
   case CHECK_BOOK_SUCCESS:
-      return { ...state, isChecked: action.payload };
+    return { ...state, isChecked: action.payload };
 
   case CHECK_BOOK_FAILURE:
-      return { ...state, error: action.payload };
+    return { ...state, error: action.payload };
 
-    default: return state;
+  case SEARCH_BOOKS:
+    return { ...state, foundedBooks: action.payload };
+
+
+  default: return state;
   }
 };
 
