@@ -7,6 +7,7 @@ import BookCardList from '../BookCardList';
 import BooksPagination from '../BooksPagination';
 import Spinner from '../Spinner';
 import SearchBar from '../SearchBar';
+import Title from '../Title';
 
 import { getBooksAsync } from '../../store/actions/books';
 
@@ -28,6 +29,7 @@ const MainPage = ({
           ? <Spinner/>
           : <>
               <SearchBar books={books}/>
+              <Title title='Книги'/>
               <BookCardList books={foundedBooks && !!foundedBooks.length ? foundedBooks : books}/>
               <BooksPagination/>
             </>

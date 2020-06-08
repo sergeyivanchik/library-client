@@ -7,7 +7,10 @@ import {
   CHECK_AUTHORIZATION,
   LOG_OUT_SUCCESS,
   LOG_OUT_FAILURE,
-  LOG_OUT
+  LOG_OUT,
+  SIGN_UP_SUCCESS,
+  SIGN_UP_FAILURE,
+  SIGN_UP
 } from '../consts/users';
 
 export const logInSuccess = data => ({
@@ -50,4 +53,18 @@ export const logOutFailure = error => ({
 
 export const logOut = () => ({
   type: LOG_OUT
+});
+
+export const signUpSuccess = () => ({
+  type: SIGN_UP_SUCCESS
+});
+
+export const signUpFailure = error => ({
+  type: SIGN_UP_FAILURE,
+  payload: error
+});
+
+export const signUpAsync = data => ({
+  type: SIGN_UP,
+  payload: data
 });

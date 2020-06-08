@@ -15,7 +15,8 @@ import { SET_CURRENT_NUMBER } from '../consts/pagination';
 import {
   LOG_IN,
   CHECK_AUTHORIZATION,
-  LOG_OUT
+  LOG_OUT,
+  SIGN_UP
 } from '../consts/users'
 
 import {
@@ -33,7 +34,8 @@ import { setCurrentNumber } from './pagination';
 import {
   logIn,
   checkAuthorization,
-  logOut
+  logOut,
+  signUp
 } from './users';
 
 
@@ -58,6 +60,7 @@ function* watchUsers() {
   yield takeEvery(LOG_IN, logIn);
   yield takeEvery(CHECK_AUTHORIZATION, checkAuthorization);
   yield takeEvery(LOG_OUT, logOut);
+  yield takeEvery(SIGN_UP, signUp);
 };
 
 export default function* rootSaga() {

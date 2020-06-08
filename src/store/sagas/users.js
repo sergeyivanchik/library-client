@@ -9,10 +9,12 @@ import {
   checkAuthorizationSuccess,
   checkAuthorizationFailure,
   logOutSuccess,
-  logOutFailure
+  logOutFailure,
+  signUpSuccess,
+  signUpFailure
 } from '../actions/users';
 import { hideSpin, showSpin } from '../actions/spinner';
-import { hideLoginForm } from '../actions/forms';
+import { hideLoginForm, hideSignupForm } from '../actions/forms';
 
 
 export function* logIn({ payload }) {
@@ -56,5 +58,25 @@ export function* logOut() {
     Message('success', 'Вы успешно вышли!')
   } catch (error) {
     yield put(logOutFailure(error));
+  };
+};
+
+export function* signUp({ payload }) {
+  try {
+    yield put(showSpin());
+
+    const { data } = yield call(() => axios.post('users/signup', { ...payload }));
+
+    if (data) {
+      yield put(signUpSuccess());
+    } else Message('error', 'Something wrong!');
+
+    yield put(hideSignupForm());
+    yield put(hideSpin());
+    Message('success', 'Вы успешно зарегистрировались!');
+  } catch (error) {
+    yield put(hideSpin());
+    yield put(signUpFailure(error));
+    Message('error', 'Введены некоректные данные!');
   };
 };

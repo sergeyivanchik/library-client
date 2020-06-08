@@ -17,6 +17,7 @@ const App = () => {
   const dispatch = useDispatch();
   const isShowSpinner = useSelector(store => store.spinner.show);
   const isShowLoginForm = useSelector(store => store.forms.showLoginForm);
+  const isShowSignupForm = useSelector(store => store.forms.showSignupForm);
 
   useEffect(() => {
     dispatch(checkAuthorizationAsync());
@@ -35,7 +36,7 @@ const App = () => {
           <Route path="/author/:authorId" component={CurrentAuthor}/>
         </div>
 
-        <Form isShow={isShowLoginForm}/>
+        <Form isShowLoginForm={isShowLoginForm} isShowSignupForm={isShowSignupForm}/>
       </div>
     </Router>
   );

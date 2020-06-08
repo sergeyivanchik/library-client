@@ -4,7 +4,9 @@ import {
   CHECK_AUTHORIZATION_SUCCESS,
   CHECK_AUTHORIZATION_FAILURE,
   LOG_OUT_SUCCESS,
-  LOG_OUT_FAILURE
+  LOG_OUT_FAILURE,
+  SIGN_UP_SUCCESS,
+  SIGN_UP_FAILURE
 } from '../consts/users';
 
 const initialState = {
@@ -30,6 +32,12 @@ const users = (state = initialState, action) => {
       return { ...state, currentUser: null };
 
     case LOG_OUT_FAILURE:
+      return { ...state, error: action.payload };
+
+    case SIGN_UP_SUCCESS:
+      return { ...state };
+
+    case SIGN_UP_FAILURE:
       return { ...state, error: action.payload };
 
     default: return state;
