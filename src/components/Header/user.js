@@ -1,5 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from  'react-redux';
+import { Link } from 'react-router-dom';
 
 import './user.scss';
 
@@ -23,12 +24,14 @@ const User = () => {
   };
 
   return (
-    <img
-      alt='auth'
-      src={isAuthorized ? user : login}
-      className='user'
-      onClick={handleLoginClick}
-    />
+    <Link to={isAuthorized && '/'}>
+      <img
+        alt='auth'
+        src={isAuthorized ? user : login}
+        className='user'
+        onClick={handleLoginClick}
+      />
+    </Link>
   );
 }
 

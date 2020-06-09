@@ -19,7 +19,8 @@ const App = () => {
   const isShowSpinner = useSelector(store => store.spinner.show);
   const isShowLoginForm = useSelector(store => store.forms.showLoginForm);
   const isShowSignupForm = useSelector(store => store.forms.showSignupForm);
-  const isAuthorized = useSelector(store => !!store.users.currentUser);
+
+  const isAuthorized = localStorage.getItem('token') !== null ? true : false;
 
   useEffect(() => {
     dispatch(checkAuthorizationAsync());

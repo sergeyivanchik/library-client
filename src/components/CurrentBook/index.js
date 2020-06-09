@@ -8,6 +8,7 @@ import Mark from './Mark';
 import Spinner from '../Spinner';
 
 import { getCurrentBookAsync, checkBookAsync } from '../../store/actions/books';
+import { checkAuthorizationAsync } from '../../store/actions/users';
 
 
 const CurrentBook = ({ match: { params : { bookId } } }) => {
@@ -17,9 +18,15 @@ const CurrentBook = ({ match: { params : { bookId } } }) => {
   const currentUser = useSelector(store => store.users.currentUser);
 
   useEffect(() => {
+    currentUser &&
+    currentUser.id &&
+    dispatch(checkBookAsync({ bookId, userId: currentUser && currentUser.id }));
+  }, [currentUser && currentUser.id]);
+
+  useEffect(() => {
+    dispatch(checkAuthorizationAsync());
     dispatch(getCurrentBookAsync(bookId));
-    dispatch(checkBookAsync({ bookId, userId: currentUser.id }))
-  }, [dispatch, bookId, currentUser.id]);
+  }, []);
 
   return (
     <div className="current-book">

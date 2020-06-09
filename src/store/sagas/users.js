@@ -42,10 +42,14 @@ export function* logIn({ payload }) {
 export function* checkAuthorization() {
     try {
       const token = localStorage.getItem('token');
-      axios.defaults.headers['AUTHORIZATION'] = token;
-      const { data } = yield call(() => axios.post('users/checkUser'));
 
-      yield put(checkAuthorizationSuccess(data));
+      if (token) {
+        axios.defaults.headers['AUTHORIZATION'] = token;
+        const { data } = yield call(() => axios.post('users/checkUser'));
+        yield put(checkAuthorizationSuccess(data));
+      } else {
+        yield put(checkAuthorizationFailure('Token not found!'));
+      }
     } catch (error) {
       yield put(checkAuthorizationFailure(error));
     }
@@ -55,7 +59,8 @@ export function* logOut() {
   try {
     localStorage.clear();
     yield put(logOutSuccess());
-    Message('success', 'Вы успешно вышли!')
+    Message('success', 'Вы успешно вышли!');
+    window.location.pathname('/');
   } catch (error) {
     yield put(logOutFailure(error));
   };
