@@ -15,7 +15,9 @@ import * as serviceWorker from './serviceWorker';
 import rootReducer from './store/reducers';
 import rootSaga from './store/sagas';
 
-axios.defaults.baseURL = 'http://localhost:8080/';
+import { baseURL } from './configs/baseURL';
+
+axios.defaults.baseURL = baseURL;
 const saga = createSagaMiddleware()
 const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(saga)));
 saga.run(rootSaga);
