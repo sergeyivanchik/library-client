@@ -10,11 +10,13 @@ import { Popover } from 'antd';
 import PopoverContent from '../../PopoverContent';
 
 import { selectBookAsync } from '../../../store/actions/books';
+import { checkAuthorizationAsync } from '../../../store/actions/users';
 
 
 const Mark = ({ bookId }) => {
   const dispatch = useDispatch();
   const isChecked = useSelector(store => store.books.isChecked);
+  const currentUser = useSelector(store => store.users.currentUser);
 
   return (
     <Popover content={<PopoverContent title={isChecked ? "Удалить" : "Добавить"}/>}>
@@ -22,7 +24,12 @@ const Mark = ({ bookId }) => {
           alt='mark'
           src={isChecked ? checkedMark : uncheckedMark}
           className="mark"
-          onClick={() => dispatch(selectBookAsync({ bookId, userId: '5ed8e4696111d53bb45469d3' }))}
+          onClick={() => {
+            dispatch(checkAuthorizationAsync());
+            currentUser &&
+            currentUser.id &&
+            dispatch(selectBookAsync({ bookId, userId: currentUser.id }));
+          }}
         />
     </Popover>
   );

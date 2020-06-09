@@ -9,6 +9,7 @@ import CurrentAuthor from './components/CurrentAuthor';
 import MainPage from './components/MainPage';
 import Header from './components/Header';
 import Form from './components/Form';
+import Error from './components/Error';
 
 import { checkAuthorizationAsync } from './store/actions/users';
 
@@ -18,6 +19,8 @@ const App = () => {
   const isShowSpinner = useSelector(store => store.spinner.show);
   const isShowLoginForm = useSelector(store => store.forms.showLoginForm);
   const isShowSignupForm = useSelector(store => store.forms.showSignupForm);
+
+  const isAuthorized = localStorage.getItem('token') !== null ? true : false;
 
   useEffect(() => {
     dispatch(checkAuthorizationAsync());
@@ -31,9 +34,9 @@ const App = () => {
         }
 
         <div className="container__routes">
-          <Route exact path='/' component={MainPage}/>
-          <Route path="/book/:bookId" component={CurrentBook}/>
-          <Route path="/author/:authorId" component={CurrentAuthor}/>
+          <Route exact path='/' component={MainPage }/>
+          <Route path="/book/:bookId" component={isAuthorized ? CurrentBook : Error}/>
+          <Route path="/author/:authorId" component={isAuthorized ? CurrentAuthor : Error}/>
         </div>
 
         <Form isShowLoginForm={isShowLoginForm} isShowSignupForm={isShowSignupForm}/>
