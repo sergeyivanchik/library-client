@@ -6,6 +6,7 @@ import pagination from './pagination';
 import spinner from './spinner';
 import users from './users';
 import forms from './forms';
+import comments from './comments';
 
 const rootReducer = combineReducers ({
   books,
@@ -13,7 +14,8 @@ const rootReducer = combineReducers ({
   pagination,
   spinner,
   users,
-  forms
+  forms,
+  comments
 });
 
 export default rootReducer;
