@@ -17,7 +17,10 @@ import {
   CHECK_AUTHORIZATION,
   LOG_OUT,
   SIGN_UP
-} from '../consts/users'
+} from '../consts/users';
+import {
+  GET_COMMENTS_BY_BOOK
+} from '../consts/comments'
 
 import {
   getBooks,
@@ -37,6 +40,9 @@ import {
   logOut,
   signUp
 } from './users';
+import {
+  getCommentsByBook
+} from './comments';
 
 
 function* watchBooks() {
@@ -63,11 +69,16 @@ function* watchUsers() {
   yield takeEvery(SIGN_UP, signUp);
 };
 
+function* watchComments() {
+  yield takeEvery(GET_COMMENTS_BY_BOOK, getCommentsByBook);
+};
+
 export default function* rootSaga() {
   yield all([
     watchBooks(),
     watchAuthors(),
     watchPagination(),
-    watchUsers()
+    watchUsers(),
+    watchComments()
   ]);
 };

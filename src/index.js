@@ -16,11 +16,13 @@ import rootReducer from './store/reducers';
 import rootSaga from './store/sagas';
 
 import { baseURL } from './configs/baseURL';
+import socketConfig from './configs/socket';
 
 axios.defaults.baseURL = baseURL;
 const saga = createSagaMiddleware()
 const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(saga)));
 saga.run(rootSaga);
+socketConfig(store.dispatch);
 
 
 ReactDOM.render(
