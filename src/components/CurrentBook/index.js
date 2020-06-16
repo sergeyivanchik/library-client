@@ -6,9 +6,11 @@ import './index.scss';
 import Line from './Line';
 import Mark from './Mark';
 import Spinner from '../Spinner';
+import UserComment from '../UserComment';
 
 import { getCurrentBookAsync, checkBookAsync } from '../../store/actions/books';
 import { checkAuthorizationAsync } from '../../store/actions/users';
+import { getCommentsByBookAsync } from '../../store/actions/comments';
 
 
 const CurrentBook = ({ match: { params : { bookId } } }) => {
@@ -16,6 +18,7 @@ const CurrentBook = ({ match: { params : { bookId } } }) => {
   const currentBook = useSelector(store => store.books.currentBook);
   const showSpinner = useSelector(store => store.spinner.show);
   const currentUser = useSelector(store => store.users.currentUser);
+  const comments = useSelector(store => store.comments.comments);
 
   useEffect(() => {
     currentUser &&
@@ -26,6 +29,7 @@ const CurrentBook = ({ match: { params : { bookId } } }) => {
   useEffect(() => {
     dispatch(checkAuthorizationAsync());
     dispatch(getCurrentBookAsync(bookId));
+    dispatch(getCommentsByBookAsync(bookId));
   }, []);
 
   return (
@@ -64,6 +68,14 @@ const CurrentBook = ({ match: { params : { bookId } } }) => {
                 <p className="current-book__story">{currentBook && currentBook.story}</p>
               </div>
             </>
+      }
+
+      {
+        comments &&
+        !!comments.length &&
+        comments.map((comment, index) => {
+          return <UserComment comment={comment}/>;
+        })
       }
     </div>
   );
