@@ -13,7 +13,10 @@ const AddCommentForm = ({ bookId, user }) => {
     <Comment
       avatar={
         <Avatar
-          src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
+          src={
+            (user && user.avatar) ||
+            "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
+          }
           alt={user && user.username}
         />
       }
