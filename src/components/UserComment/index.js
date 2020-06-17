@@ -19,7 +19,7 @@ const UserComment = ({ comment }) => {
       avatar={
         <Avatar
           src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
-          alt="Han Solo"
+          alt={comment.user.username}
         />
       }
       content={

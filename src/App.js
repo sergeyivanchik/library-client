@@ -13,8 +13,6 @@ import Error from './components/Error';
 
 import { checkAuthorizationAsync } from './store/actions/users';
 
-import { sendToServer } from './configs/socket';
-
 
 const App = () => {
   const dispatch = useDispatch();
@@ -27,10 +25,6 @@ const App = () => {
   useEffect(() => {
     dispatch(checkAuthorizationAsync());
   });
-
-  useEffect(() => {
-    sendToServer({number: 123})
-  }, []);
 
   return (
     <Router>

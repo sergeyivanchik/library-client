@@ -7,6 +7,7 @@ import Line from './Line';
 import Mark from './Mark';
 import Spinner from '../Spinner';
 import UserComment from '../UserComment';
+import AddCommentForm from '../AddCommentForm';
 
 import { getCurrentBookAsync, checkBookAsync } from '../../store/actions/books';
 import { checkAuthorizationAsync } from '../../store/actions/users';
@@ -70,11 +71,13 @@ const CurrentBook = ({ match: { params : { bookId } } }) => {
             </>
       }
 
+      <AddCommentForm bookId={bookId} user={currentUser}/>
+
       {
         comments &&
         !!comments.length &&
-        comments.map((comment, index) => {
-          return <UserComment comment={comment}/>;
+        comments.map(comment => {
+          return <UserComment comment={comment} key={comment && comment.id}/>;
         })
       }
     </div>
