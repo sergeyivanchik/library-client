@@ -7,12 +7,11 @@ import Line from './Line';
 import Mark from './Mark';
 import Spinner from '../Spinner';
 import UserComment from '../UserComment';
+import AddCommentForm from '../AddCommentForm';
 
 import { getCurrentBookAsync, checkBookAsync } from '../../store/actions/books';
 import { checkAuthorizationAsync } from '../../store/actions/users';
 import { getCommentsByBookAsync } from '../../store/actions/comments';
-
-import { sendToServer } from '../../configs/socket';
 
 
 const CurrentBook = ({ match: { params : { bookId } } }) => {
@@ -72,24 +71,13 @@ const CurrentBook = ({ match: { params : { bookId } } }) => {
             </>
       }
 
-      <button
-        onClick={() => {
-          sendToServer({
-            user: "5ede88305de91c1fccd1daaa",
-            book: "5ed8c9f4d81ef337941bea19",
-            date: "1592259320029",
-            comment: "Советую"
-          });
-        }}
-      >
-        ADD COMMENT
-      </button>
+      <AddCommentForm bookId={bookId} user={currentUser}/>
 
       {
         comments &&
         !!comments.length &&
         comments.map(comment => {
-          return <UserComment comment={comment} key={comment.id}/>;
+          return <UserComment comment={comment} key={comment && comment.id}/>;
         })
       }
     </div>
