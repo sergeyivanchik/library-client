@@ -1,6 +1,7 @@
 import {
   GET_COMMENTS_BY_BOOK_SUCCESS,
-  GET_COMMENTS_BY_BOOK_FAILURE
+  GET_COMMENTS_BY_BOOK_FAILURE,
+  ADD_COMMENT
 } from '../consts/comments';
 
 const initialState = {
@@ -15,6 +16,9 @@ const comments = (state = initialState, action) => {
 
   case GET_COMMENTS_BY_BOOK_FAILURE:
     return { ...state, error: action.payload };
+
+  case ADD_COMMENT:
+    return { ...state, comments: [...state.comments, action.payload] };
 
   default: return state;
   }

@@ -12,6 +12,8 @@ import { getCurrentBookAsync, checkBookAsync } from '../../store/actions/books';
 import { checkAuthorizationAsync } from '../../store/actions/users';
 import { getCommentsByBookAsync } from '../../store/actions/comments';
 
+import { sendToServer } from '../../configs/socket';
+
 
 const CurrentBook = ({ match: { params : { bookId } } }) => {
   const dispatch = useDispatch();
@@ -70,11 +72,24 @@ const CurrentBook = ({ match: { params : { bookId } } }) => {
             </>
       }
 
+      <button
+        onClick={() => {
+          sendToServer({
+            user: "5ede88305de91c1fccd1daaa",
+            book: "5ed8c9f4d81ef337941bea19",
+            date: "1592259320029",
+            comment: "Советую"
+          });
+        }}
+      >
+        ADD COMMENT
+      </button>
+
       {
         comments &&
         !!comments.length &&
-        comments.map((comment, index) => {
-          return <UserComment comment={comment}/>;
+        comments.map(comment => {
+          return <UserComment comment={comment} key={comment.id}/>;
         })
       }
     </div>
