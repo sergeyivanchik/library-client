@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 
+import './editor.scss';
+
 import { Form, Button, Input } from 'antd';
 
 import { sendToServer } from '../../configs/socket';
