@@ -13,15 +13,12 @@ const SearchBar = ({ books }) => {
 
   const search = (allBooks, value) => {
     const result =
-      allBooks &&
-      !!allBooks.length &&
+      !!allBooks?.length &&
       allBooks.filter(book => book.title.toLowerCase().includes(value.toLowerCase()));
 
-    if (result && !!result.length) {
-      dispatch(searchBooks(result));
-    } else {
-      dispatch(searchBooks([]));
-    };
+    !!result?.length
+      ? dispatch(searchBooks(result))
+      : dispatch(searchBooks([]));
   };
 
   return (

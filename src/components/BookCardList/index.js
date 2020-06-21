@@ -15,8 +15,7 @@ const BookCardList = ({ books }) => {
     const endIndex = number * totalNumber;
 
     return (
-      allBooks &&
-      !!allBooks.length &&
+      !!allBooks?.length &&
       allBooks.slice(beginIndex, endIndex)
     );
   }
@@ -24,8 +23,7 @@ const BookCardList = ({ books }) => {
   return (
     <div className="book-card-list">
       {
-        books &&
-        !!books.length &&
+        !!books?.length &&
         getCurrentData(currentNumber, books).map((book, index) => {
           return (
             <BookCard
