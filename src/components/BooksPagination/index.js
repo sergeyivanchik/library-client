@@ -21,7 +21,7 @@ const BooksPagination = () => {
         defaultCurrent={1}
         current={currentNumber}
         pageSize={totalNumber}
-        total={(foundedBooks && foundedBooks.length) || (books && books.length)}
+        total={foundedBooks?.length || books?.length}
         onChange={pageNumber => dispatch(setCurrentNumber(pageNumber))}
       />
     </div>

@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 
+import './editor.scss';
+
 import { Form, Button, Input } from 'antd';
 
 import { sendToServer } from '../../configs/socket';
@@ -11,7 +13,7 @@ const Editor = ({ bookId, user }) => {
   const handleClick = () => {
     if (comment) {
       sendToServer({
-        user: user && user.id,
+        user: user?.id,
         book: bookId,
         date: Date.now(),
         comment

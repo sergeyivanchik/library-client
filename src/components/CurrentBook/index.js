@@ -22,10 +22,9 @@ const CurrentBook = ({ match: { params : { bookId } } }) => {
   const comments = useSelector(store => store.comments.comments);
 
   useEffect(() => {
-    currentUser &&
-    currentUser.id &&
-    dispatch(checkBookAsync({ bookId, userId: currentUser && currentUser.id }));
-  }, [currentUser && currentUser.id]);
+    currentUser?.id &&
+    dispatch(checkBookAsync({ bookId, userId: currentUser?.id }));
+  }, [currentUser?.id]);
 
   useEffect(() => {
     dispatch(checkAuthorizationAsync());
@@ -41,8 +40,8 @@ const CurrentBook = ({ match: { params : { bookId } } }) => {
           : <>
               <div className="current-book__top">
                 <img
-                  src={currentBook && currentBook.image}
-                  alt={currentBook && currentBook.title}
+                  src={currentBook?.image}
+                  alt={currentBook?.title}
                   className="current-book__poster"
                 />
 
@@ -50,13 +49,13 @@ const CurrentBook = ({ match: { params : { bookId } } }) => {
                   <div>
                     <Line
                       title="Автор"
-                      info={currentBook && currentBook.author && currentBook.author.name}
-                      authorId={currentBook && currentBook.author && currentBook.author.id}
+                      info={currentBook?.author?.name}
+                      authorId={currentBook?.author?.id}
                     />
-                    <Line title="Название" info={currentBook && currentBook.title}/>
-                    <Line title="Жанры" info={currentBook && currentBook.genres}/>
-                    <Line title="Год" info={currentBook && currentBook.publishing}/>
-                    <Line title="Издательство" info={currentBook && currentBook.publisher}/>
+                    <Line title="Название" info={currentBook?.title}/>
+                    <Line title="Жанры" info={currentBook?.genres}/>
+                    <Line title="Год" info={currentBook?.publishing}/>
+                    <Line title="Издательство" info={currentBook?.publisher}/>
                   </div>
 
                   <div>
@@ -66,7 +65,7 @@ const CurrentBook = ({ match: { params : { bookId } } }) => {
               </div>
 
               <div className="current-book__bottom">
-                <p className="current-book__story">{currentBook && currentBook.story}</p>
+                <p className="current-book__story">{currentBook?.story}</p>
               </div>
             </>
       }
@@ -74,10 +73,9 @@ const CurrentBook = ({ match: { params : { bookId } } }) => {
       <AddCommentForm bookId={bookId} user={currentUser}/>
 
       {
-        comments &&
-        !!comments.length &&
+        !!comments?.length &&
         comments.map(comment => {
-          return <UserComment comment={comment} key={comment && comment.id}/>;
+          return <UserComment comment={comment} key={comment?.id}/>;
         })
       }
     </div>

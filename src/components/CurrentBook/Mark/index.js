@@ -26,8 +26,7 @@ const Mark = ({ bookId }) => {
           className="mark"
           onClick={() => {
             dispatch(checkAuthorizationAsync());
-            currentUser &&
-            currentUser.id &&
+            currentUser?.id &&
             dispatch(selectBookAsync({ bookId, userId: currentUser.id }));
           }}
         />

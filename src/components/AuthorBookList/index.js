@@ -8,8 +8,7 @@ const AuthorBookList = ({ books }) => {
   return (
     <div className='author-book-list'>
       {
-        books &&
-        !!books.length &&
+        !!books?.length &&
         books.map((book, index) => (
           <AuthorBook key={index} book={book}/>
         ))

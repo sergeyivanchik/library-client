@@ -30,7 +30,7 @@ const MainPage = ({
           : <>
               <SearchBar books={books}/>
               <Title title='Книги'/>
-              <BookCardList books={foundedBooks && !!foundedBooks.length ? foundedBooks : books}/>
+              <BookCardList books={!!foundedBooks?.length ? foundedBooks : books}/>
               <BooksPagination/>
             </>
       }

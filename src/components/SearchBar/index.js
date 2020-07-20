@@ -5,8 +5,6 @@ import './index.scss';
 
 import { Input } from 'antd';
 
-import Message from '../Message';
-
 import { searchBooks } from '../../store/actions/books';
 
 
@@ -15,22 +13,19 @@ const SearchBar = ({ books }) => {
 
   const search = (allBooks, value) => {
     const result =
-      allBooks &&
-      !!allBooks.length &&
+      !!allBooks?.length &&
       allBooks.filter(book => book.title.toLowerCase().includes(value.toLowerCase()));
 
-    if (result && !!result.length) {
-      value && Message('success', 'Книги найдены!');
-      dispatch(searchBooks(result));
-    } else {
-      Message('warning', 'Поиск не дал результатов!');
-    }
+    !!result?.length
+      ? dispatch(searchBooks(result))
+      : dispatch(searchBooks([]));
   };
 
   return (
     <div className='search-bar'>
       <Input.Search
         placeholder="search books"
+        onChange={e => search(books, e.target.value)}
         onSearch={value => search(books, value)}
       />
     </div>

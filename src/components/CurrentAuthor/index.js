@@ -26,8 +26,8 @@ const CurrentAuthor = ({ match: { params : { authorId } } }) => {
         showSpinner
           ? <Spinner/>
           : <>
-              <img alt='author' src={currentAuthor && currentAuthor.photo}/>
-              {currentAuthor && currentAuthor.name}
+              <img alt='author' src={currentAuthor?.photo}/>
+              {currentAuthor?.name}
             </>
       }
 
