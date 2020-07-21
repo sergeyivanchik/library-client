@@ -13,7 +13,9 @@ import {
   selectBookSuccess,
   selectBookFailure,
   checkBookSuccess,
-  checkBookFailure
+  checkBookFailure,
+  getBookRatingSuccess,
+  getBookRatingFailure
 } from '../actions/books';
 import { hideSpin, showSpin } from '../actions/spinner';
 
@@ -84,5 +86,17 @@ export function* checkBook({ payload }) {
     yield put(checkBookSuccess(!!data));
   } catch (error) {
     yield put(checkBookFailure(error));
+  };
+};
+
+export function* getBookRating({ payload }) {
+  try {
+    const { data } = yield call(() =>
+      axios.post(`books/getRating/${payload.bookId}/${payload.userId}`)
+    );
+
+    yield put(getBookRatingSuccess(data));
+  } catch (error) {
+    yield put(getBookRatingFailure(error));
   };
 };

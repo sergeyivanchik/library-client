@@ -5,7 +5,8 @@ import {
   GET_CURRENT_BOOK,
   GET_BOOKS_BY_AUTHOR,
   SELECT_BOOK,
-  CHECK_BOOK
+  CHECK_BOOK,
+  GET_BOOK_RATING
 } from '../consts/books';
 import {
   GET_AUTHORS,
@@ -27,7 +28,8 @@ import {
   getCurrentBook,
   getBooksByAuthor,
   selectBook,
-  checkBook
+  checkBook,
+  getBookRating
 } from './books';
 import {
   getAuthors,
@@ -51,6 +53,7 @@ function* watchBooks() {
   yield takeEvery(GET_BOOKS_BY_AUTHOR, getBooksByAuthor);
   yield takeEvery(SELECT_BOOK, selectBook);
   yield takeEvery(CHECK_BOOK, checkBook);
+  yield takeEvery(GET_BOOK_RATING, getBookRating);
 };
 
 function* watchAuthors() {
