@@ -4,7 +4,7 @@ import './editor.scss';
 
 import { Form, Button, Input } from 'antd';
 
-import { sendToServer } from '../../configs/socket';
+import { sendCommentToServer } from '../../configs/socket';
 
 
 const Editor = ({ bookId, user }) => {
@@ -12,7 +12,7 @@ const Editor = ({ bookId, user }) => {
 
   const handleClick = () => {
     if (comment) {
-      sendToServer({
+      sendCommentToServer({
         user: user?.id,
         book: bookId,
         date: Date.now(),
