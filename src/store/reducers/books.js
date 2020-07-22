@@ -24,6 +24,7 @@ const initialState = {
   isChecked: false,
   userRating: 0,
   averageRating: 0,
+  rates: [],
   error: ''
 };
 
@@ -66,7 +67,8 @@ const books = (state = initialState, action) => {
     return {
       ...state,
       userRating: action.payload.userRating,
-      averageRating: action.payload.averageRating
+      averageRating: action.payload.averageRating,
+      rates: action.payload.rates
     };
 
   case GET_BOOK_RATING_FAILURE:
@@ -75,7 +77,8 @@ const books = (state = initialState, action) => {
   case SET_BOOK_AVERAGE_RATING:
     return {
       ...state,
-      averageRating: action.payload.averageRating
+      averageRating: action.payload.averageRating,
+      rates: action.payload.rates
     };
 
   case SET_BOOK_USER_RATING:

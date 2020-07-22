@@ -7,7 +7,7 @@ import Line from './Line';
 import Mark from './Mark';
 import Spinner from '../Spinner';
 import Rating from './Rating';
-import CommentList from '../CommentList';
+import BottomPanel from './BottomPanel';
 
 
 import {
@@ -27,6 +27,7 @@ const CurrentBook = ({ match: { params : { bookId } } }) => {
   const comments = useSelector(store => store.comments.comments);
   const averageRating = useSelector(store => store.books.averageRating);
   const userRating = useSelector(store => store.books.userRating);
+  const rates = useSelector(store => store.books.rates);
 
   useEffect(() => {
     if (currentUser?.id) {
@@ -83,7 +84,12 @@ const CurrentBook = ({ match: { params : { bookId } } }) => {
                 <p className="current-book__story">{currentBook?.story}</p>
               </div>
 
-              <CommentList comments={comments} bookId={bookId} user={currentUser}/>
+              <BottomPanel
+                comments={comments}
+                bookId={bookId}
+                user={currentUser}
+                rates={rates}
+              />
             </>
       }
     </div>
