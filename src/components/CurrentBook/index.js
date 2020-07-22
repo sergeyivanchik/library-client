@@ -6,9 +6,9 @@ import './index.scss';
 import Line from './Line';
 import Mark from './Mark';
 import Spinner from '../Spinner';
-import UserComment from '../UserComment';
-import AddCommentForm from '../AddCommentForm';
 import Rating from './Rating';
+import CommentList from '../CommentList';
+
 
 import {
   getCurrentBookAsync,
@@ -83,14 +83,7 @@ const CurrentBook = ({ match: { params : { bookId } } }) => {
                 <p className="current-book__story">{currentBook?.story}</p>
               </div>
 
-              <AddCommentForm bookId={bookId} user={currentUser}/>
-
-              {
-                !!comments?.length &&
-                comments.map(comment => {
-                  return <UserComment comment={comment} key={comment?.id}/>;
-                })
-              }
+              <CommentList comments={comments} bookId={bookId} user={currentUser}/>
             </>
       }
     </div>
