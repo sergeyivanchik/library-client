@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import './index.scss';
 
@@ -7,12 +7,21 @@ import AddCommentForm from '../AddCommentForm';
 
 
 const CommentList = ({ comments, bookId, user }) => {
+  const [showCommentForm, setShowCommentForm] = useState(false);
 
   return (
     <div className="comment-list">
-      <span className="comment-list__title">
-        Отзывы
+      <span
+        className="comment-list__title"
+        onClick={() => setShowCommentForm(!showCommentForm)}
+      >
+        Оставить отзыв
       </span>
+
+      {
+        showCommentForm &&
+        <AddCommentForm bookId={bookId} user={user}/>
+      }
 
       {
         !!comments?.length &&
@@ -21,7 +30,6 @@ const CommentList = ({ comments, bookId, user }) => {
         })
       }
 
-      <AddCommentForm bookId={bookId} user={user}/>
     </div>
   );
 }
