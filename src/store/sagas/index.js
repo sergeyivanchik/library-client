@@ -20,7 +20,9 @@ import {
   SIGN_UP
 } from '../consts/users';
 import {
-  GET_COMMENTS_BY_BOOK
+  GET_COMMENTS_BY_BOOK,
+  GET_COMMENTS_LIKES,
+  GET_COMMENTS_LIKES_FAILURE
 } from '../consts/comments'
 
 import {
@@ -43,7 +45,8 @@ import {
   signUp
 } from './users';
 import {
-  getCommentsByBook
+  getCommentsByBook,
+  getCommentsLikes
 } from './comments';
 
 
@@ -74,6 +77,7 @@ function* watchUsers() {
 
 function* watchComments() {
   yield takeEvery(GET_COMMENTS_BY_BOOK, getCommentsByBook);
+  yield takeEvery(GET_COMMENTS_LIKES, getCommentsLikes);
 };
 
 export default function* rootSaga() {

@@ -16,7 +16,7 @@ import {
   getBookRatingAsync
 } from '../../store/actions/books';
 import { checkAuthorizationAsync } from '../../store/actions/users';
-import { getCommentsByBookAsync } from '../../store/actions/comments';
+import { getCommentsByBookAsync, getCommentsLikesAsync } from '../../store/actions/comments';
 
 
 const CurrentBook = ({ match: { params : { bookId } } }) => {
@@ -40,6 +40,7 @@ const CurrentBook = ({ match: { params : { bookId } } }) => {
     dispatch(checkAuthorizationAsync());
     dispatch(getCurrentBookAsync(bookId));
     dispatch(getCommentsByBookAsync(bookId));
+    dispatch(getCommentsLikesAsync(bookId));
   }, []);
 
   return (

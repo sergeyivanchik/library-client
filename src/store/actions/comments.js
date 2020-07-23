@@ -2,7 +2,11 @@ import {
   GET_COMMENTS_BY_BOOK_SUCCESS,
   GET_COMMENTS_BY_BOOK_FAILURE,
   GET_COMMENTS_BY_BOOK,
-  ADD_COMMENT
+  ADD_COMMENT,
+  SET_COMMENT_LIKES,
+  GET_COMMENTS_LIKES_SUCCESS,
+  GET_COMMENTS_LIKES_FAILURE,
+  GET_COMMENTS_LIKES
 } from '../consts/comments';
 
 
@@ -24,4 +28,24 @@ export const getCommentsByBookAsync = bookId => ({
 export const addComment = comment => ({
   type: ADD_COMMENT,
   payload: comment
+});
+
+export const setCommensLikes = data => ({
+  type: SET_COMMENT_LIKES,
+  payload: data
+});
+
+export const getCommentsLikesSuccess = data => ({
+  type: GET_COMMENTS_LIKES_SUCCESS,
+  payload: data
+});
+
+export const getCommentsLikesFailure = error => ({
+  type: GET_COMMENTS_LIKES_FAILURE,
+  payload: error
+});
+
+export const getCommentsLikesAsync = data => ({
+  type: GET_COMMENTS_LIKES,
+  payload: data
 });

@@ -1,11 +1,15 @@
 import {
   GET_COMMENTS_BY_BOOK_SUCCESS,
   GET_COMMENTS_BY_BOOK_FAILURE,
-  ADD_COMMENT
+  ADD_COMMENT,
+  SET_COMMENT_LIKES,
+  GET_COMMENTS_LIKES_SUCCESS,
+  GET_COMMENTS_LIKES_FAILURE
 } from '../consts/comments';
 
 const initialState = {
   comments: [],
+  likes: {},
   error: ''
 };
 
@@ -19,6 +23,15 @@ const comments = (state = initialState, action) => {
 
   case ADD_COMMENT:
     return { ...state, comments: [...state.comments, action.payload] };
+
+  case SET_COMMENT_LIKES:
+    return { ...state, likes: action.payload };
+
+  case GET_COMMENTS_LIKES_SUCCESS:
+    return { ...state, likes: action.payload };
+
+  case GET_COMMENTS_LIKES_FAILURE:
+      return { ...state, error: action.payload };
 
   default: return state;
   }

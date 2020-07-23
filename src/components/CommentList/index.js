@@ -26,7 +26,7 @@ const CommentList = ({ comments, bookId, user }) => {
       {
         !!comments?.length &&
         comments.map(comment => {
-          return <UserComment comment={comment} key={comment?.id}/>;
+          return <UserComment comment={comment} key={comment?.id} bookId={bookId}/>;
         })
       }
 
