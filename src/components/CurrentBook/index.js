@@ -13,7 +13,7 @@ import BottomPanel from './BottomPanel';
 import {
   getCurrentBookAsync,
   checkBookAsync,
-  getBookRatingAsync
+  getBooksRatingAsync
 } from '../../store/actions/books';
 import { checkAuthorizationAsync } from '../../store/actions/users';
 import { getCommentsByBookAsync, getCommentsLikesAsync } from '../../store/actions/comments';
@@ -25,14 +25,19 @@ const CurrentBook = ({ match: { params : { bookId } } }) => {
   const showSpinner = useSelector(store => store.spinner.show);
   const currentUser = useSelector(store => store.users.currentUser);
   const comments = useSelector(store => store.comments.comments);
-  const averageRating = useSelector(store => store.books.averageRating);
-  const userRating = useSelector(store => store.books.userRating);
   const rates = useSelector(store => store.books.rates);
+
+  const ratesForCurrentBook = rates[bookId] || [];
+  const averageRating = !!ratesForCurrentBook?.length
+    ? (ratesForCurrentBook.reduce((acc, elem) => acc + elem.rate, 0) / ratesForCurrentBook.length).toFixed(1)
+    : 0;
+  const userRating = !!ratesForCurrentBook?.length &&
+    ratesForCurrentBook.find(elem => elem.user === currentUser?.id);
 
   useEffect(() => {
     if (currentUser?.id) {
       dispatch(checkBookAsync({ bookId, userId: currentUser?.id }));
-      dispatch(getBookRatingAsync({ userId: currentUser?.id, bookId }));
+      dispatch(getBooksRatingAsync());
     }
   }, [currentUser?.id]);
 
@@ -69,7 +74,7 @@ const CurrentBook = ({ match: { params : { bookId } } }) => {
                     <Line title="Издательство" info={currentBook?.publisher}/>
                     <Line title="Средний рейтинг" info={averageRating}/>
                     <Rating
-                      userRating={userRating}
+                      userRating={userRating?.rate || 0}
                       bookId={bookId}
                       userId={currentUser?.id}
                     />

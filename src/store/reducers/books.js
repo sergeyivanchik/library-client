@@ -11,9 +11,9 @@ import {
   CHECK_BOOK_SUCCESS,
   CHECK_BOOK_FAILURE,
   SEARCH_BOOKS,
-  GET_BOOK_RATING_SUCCESS,
-  GET_BOOK_RATING_FAILURE,
-  SET_BOOK_AVERAGE_RATING,
+  GET_BOOKS_RATING_SUCCESS,
+  GET_BOOKS_RATING_FAILURE,
+  SET_BOOKS_RATING,
   SET_BOOK_USER_RATING
 } from '../consts/books';
 
@@ -22,8 +22,6 @@ const initialState = {
   foundedBooks: [],
   currentBook: null,
   isChecked: false,
-  userRating: 0,
-  averageRating: 0,
   rates: [],
   error: ''
 };
@@ -63,23 +61,14 @@ const books = (state = initialState, action) => {
   case SEARCH_BOOKS:
     return { ...state, foundedBooks: action.payload };
 
-  case GET_BOOK_RATING_SUCCESS:
-    return {
-      ...state,
-      userRating: action.payload.userRating,
-      averageRating: action.payload.averageRating,
-      rates: action.payload.rates
-    };
+  case GET_BOOKS_RATING_SUCCESS:
+    return { ...state,  rates: action.payload };
 
-  case GET_BOOK_RATING_FAILURE:
+  case GET_BOOKS_RATING_FAILURE:
     return { ...state, error: action.payload };
 
-  case SET_BOOK_AVERAGE_RATING:
-    return {
-      ...state,
-      averageRating: action.payload.averageRating,
-      rates: action.payload.rates
-    };
+  case SET_BOOKS_RATING:
+    return { ...state, rates: action.payload };
 
   case SET_BOOK_USER_RATING:
     return { ...state, userRating:action.payload.userRating }

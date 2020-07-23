@@ -5,9 +5,12 @@ import './index.scss';
 import Statistic from './Statistic';
 
 
-const CommentsStatistic = ({ rates }) => {
+const CommentsStatistic = ({ rates, bookId }) => {
+  const ratesForCurrentBook = rates[bookId] || [];
+
   const ratesAmount = value => {
-    const amount = rates?.length && rates.filter(elem => elem.rate === value);
+    const amount = ratesForCurrentBook?.length &&
+      ratesForCurrentBook.filter(elem => elem.rate === value);
 
     if (amount?.length) {
       return amount.length;

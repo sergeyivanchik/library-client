@@ -2,7 +2,7 @@ import io from 'socket.io-client';
 
 import { baseURL } from './baseURL';
 import { addComment, setCommensLikes } from '../store/actions/comments';
-import { setBookAverageRating } from '../store/actions/books';
+import { setBooksRating } from '../store/actions/books';
 
 const socket = io(baseURL);
 
@@ -16,7 +16,7 @@ const socketConfig = dispatch => {
   });
 
   socket.on('getRating', data => {
-    dispatch(setBookAverageRating(data));
+    dispatch(setBooksRating(data));
   });
 
   socket.on('getLikes', data => {

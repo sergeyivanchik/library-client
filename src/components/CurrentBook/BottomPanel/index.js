@@ -10,7 +10,7 @@ const BottomPanel = ({ comments, bookId, user, rates }) => {
   return (
     <div className="bottom-panel">
       <div className="bottom-panel__statistic">
-        <CommentsStatistic rates={rates}/>
+        <CommentsStatistic rates={rates} bookId={bookId}/>
       </div>
 
       <div className="bottom-panel__comments">
