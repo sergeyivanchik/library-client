@@ -19,9 +19,9 @@ export function* getCommentsByBook({ payload }) {
   };
 };
 
-export function* getCommentsLikes({ payload }) {
+export function* getCommentsLikes() {
   try {
-    const { data } = yield call(() => axios.get(`comments/likes/${payload}`));
+    const { data } = yield call(() => axios.get(`likes`));
 
     yield put(getCommentsLikesSuccess(data));
   } catch (error) {

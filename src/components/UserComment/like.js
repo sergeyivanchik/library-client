@@ -10,11 +10,11 @@ import { sendLikeToServer } from '../../configs/socket';
 
 const Like = ({ commentId, bookId }) => {
   const currentUser = useSelector(store => store.users.currentUser);
-  const currentLikes = useSelector(store => store.comments.likes.likes);
+  const likes = useSelector(store => store.comments.likes);
 
-  const userLike = currentLikes &&
-    currentLikes[commentId]?.length &&
-    currentLikes[commentId].find(like => like === currentUser?.id);
+  const userLike = likes &&
+    likes[commentId]?.length &&
+    likes[commentId].find(like => like === currentUser?.id);
 
   const handleClick = () => {
     if (!userLike) {
@@ -25,10 +25,10 @@ const Like = ({ commentId, bookId }) => {
   return (
     <div className='like'>
       {
-        currentLikes &&
-        !!currentLikes[commentId]?.length &&
+        likes &&
+        !!likes[commentId]?.length &&
         <span className='like__value'>
-          {`+${currentLikes[commentId].length}`}
+          {`+${likes[commentId].length}`}
         </span>
       }
         <img

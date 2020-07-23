@@ -1,7 +1,7 @@
 import io from 'socket.io-client';
 
 import { baseURL } from './baseURL';
-import { addComment, setCommensLikes } from '../store/actions/comments';
+import { addComment, setCommentsLikes } from '../store/actions/comments';
 import { setBooksRating } from '../store/actions/books';
 
 const socket = io(baseURL);
@@ -20,7 +20,7 @@ const socketConfig = dispatch => {
   });
 
   socket.on('getLikes', data => {
-    dispatch(setCommensLikes(data));
+    dispatch(setCommentsLikes(data));
   });
 
   return socket;

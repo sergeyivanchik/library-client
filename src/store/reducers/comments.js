@@ -2,7 +2,7 @@ import {
   GET_COMMENTS_BY_BOOK_SUCCESS,
   GET_COMMENTS_BY_BOOK_FAILURE,
   ADD_COMMENT,
-  SET_COMMENT_LIKES,
+  SET_COMMENTS_LIKES,
   GET_COMMENTS_LIKES_SUCCESS,
   GET_COMMENTS_LIKES_FAILURE
 } from '../consts/comments';
@@ -24,7 +24,7 @@ const comments = (state = initialState, action) => {
   case ADD_COMMENT:
     return { ...state, comments: [...state.comments, action.payload] };
 
-  case SET_COMMENT_LIKES:
+  case SET_COMMENTS_LIKES:
     return { ...state, likes: action.payload };
 
   case GET_COMMENTS_LIKES_SUCCESS:

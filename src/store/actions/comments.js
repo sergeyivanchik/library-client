@@ -3,7 +3,7 @@ import {
   GET_COMMENTS_BY_BOOK_FAILURE,
   GET_COMMENTS_BY_BOOK,
   ADD_COMMENT,
-  SET_COMMENT_LIKES,
+  SET_COMMENTS_LIKES,
   GET_COMMENTS_LIKES_SUCCESS,
   GET_COMMENTS_LIKES_FAILURE,
   GET_COMMENTS_LIKES
@@ -30,8 +30,8 @@ export const addComment = comment => ({
   payload: comment
 });
 
-export const setCommensLikes = data => ({
-  type: SET_COMMENT_LIKES,
+export const setCommentsLikes = data => ({
+  type: SET_COMMENTS_LIKES,
   payload: data
 });
 
