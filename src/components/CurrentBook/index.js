@@ -39,14 +39,14 @@ const CurrentBook = ({ match: { params : { bookId } } }) => {
       dispatch(checkBookAsync({ bookId, userId: currentUser?.id }));
       dispatch(getBooksRatingAsync());
     }
-  }, [currentUser?.id]);
+  }, [bookId, currentUser, dispatch]);
 
   useEffect(() => {
     dispatch(checkAuthorizationAsync());
     dispatch(getCurrentBookAsync(bookId));
     dispatch(getCommentsByBookAsync(bookId));
     dispatch(getCommentsLikesAsync(bookId));
-  }, []);
+  }, [bookId, dispatch]);
 
   return (
     <div className="current-book">

@@ -28,6 +28,7 @@ const CommentList = ({ comments, bookId, user }) => {
         comments.map(comment => {
           if (comment?.book?.id === bookId || comment?.book === bookId)
             return <UserComment comment={comment} key={comment?.id} bookId={bookId}/>;
+          return null;
         })
       }
 

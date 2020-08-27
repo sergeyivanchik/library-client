@@ -21,8 +21,7 @@ import {
 } from '../consts/users';
 import {
   GET_COMMENTS_BY_BOOK,
-  GET_COMMENTS_LIKES,
-  GET_COMMENTS_LIKES_FAILURE
+  GET_COMMENTS_LIKES
 } from '../consts/comments'
 
 import {

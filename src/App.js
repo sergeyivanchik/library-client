@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import { useSelector, useDispatch } from  'react-redux';
+import { useSelector } from  'react-redux';
 
 import './App.scss';
 
@@ -9,23 +9,13 @@ import CurrentAuthor from './components/CurrentAuthor';
 import MainPage from './components/MainPage';
 import Header from './components/Header';
 import Form from './components/Form';
-// import Error from './components/Error';
 import PrivateRoute from './configs/PrivateRoute';
-
-import { checkAuthorizationAsync } from './store/actions/users';
 
 
 const App = () => {
-  const dispatch = useDispatch();
   const isShowSpinner = useSelector(store => store.spinner.show);
   const isShowLoginForm = useSelector(store => store.forms.showLoginForm);
   const isShowSignupForm = useSelector(store => store.forms.showSignupForm);
-
-  // const isAuthorized = localStorage.getItem('token') !== null ? true : false;
-
-  useEffect(() => {
-    dispatch(checkAuthorizationAsync());
-  });
 
   return (
     <Router>
