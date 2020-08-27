@@ -15,10 +15,10 @@ import {
   CHECK_BOOK_FAILURE,
   CHECK_BOOK,
   SEARCH_BOOKS,
-  GET_BOOK_RATING_SUCCESS,
-  GET_BOOK_RATING_FAILURE,
-  GET_BOOK_RATING,
-  SET_BOOK_AVERAGE_RATING,
+  GET_BOOKS_RATING_SUCCESS,
+  GET_BOOKS_RATING_FAILURE,
+  GET_BOOKS_RATING,
+  SET_BOOKS_RATING,
   SET_BOOK_USER_RATING
 } from '../consts/books';
 
@@ -102,23 +102,22 @@ export const searchBooks = data => ({
   payload: data
 });
 
-export const getBookRatingSuccess = data => ({
-  type: GET_BOOK_RATING_SUCCESS,
+export const getBooksRatingSuccess = data => ({
+  type: GET_BOOKS_RATING_SUCCESS,
   payload: data
 });
 
-export const getBookRatingFailure = error => ({
-  type: GET_BOOK_RATING_FAILURE,
+export const getBooksRatingFailure = error => ({
+  type: GET_BOOKS_RATING_FAILURE,
   payload: error
 });
 
-export const getBookRatingAsync = data => ({
-  type: GET_BOOK_RATING,
-  payload: data
+export const getBooksRatingAsync = () => ({
+  type: GET_BOOKS_RATING
 });
 
-export const setBookAverageRating = data => ({
-  type: SET_BOOK_AVERAGE_RATING,
+export const setBooksRating = data => ({
+  type: SET_BOOKS_RATING,
   payload: data
 });
 

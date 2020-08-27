@@ -30,7 +30,7 @@ const Editor = ({ bookId, user }) => {
       </Form.Item>
       <Form.Item>
         <Button htmlType="submit" onClick={handleClick} type="primary">
-          Add Comment
+          Добавить отзыв
         </Button>
       </Form.Item>
     </>

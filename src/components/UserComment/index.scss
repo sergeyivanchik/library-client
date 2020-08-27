@@ -1,0 +1,14 @@
+.comment {
+  position: relative;
+
+  .comment-message {
+    font-size: 15px;
+  }
+
+  .like {
+    position: absolute;
+    right: 0px;
+    top: 12px;
+    z-index: 2;
+  }
+}

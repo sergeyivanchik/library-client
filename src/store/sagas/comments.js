@@ -3,7 +3,9 @@ import axios from 'axios';
 
 import {
   getCommentsByBookSuccess,
-  getCommentsByBookFailure
+  getCommentsByBookFailure,
+  getCommentsLikesSuccess,
+  getCommentsLikesFailure
 } from '../actions/comments';
 
 
@@ -16,3 +18,13 @@ export function* getCommentsByBook({ payload }) {
     yield put(getCommentsByBookFailure(error));
   };
 };
+
+export function* getCommentsLikes() {
+  try {
+    const { data } = yield call(() => axios.get(`likes`));
+
+    yield put(getCommentsLikesSuccess(data));
+  } catch (error) {
+    yield put(getCommentsLikesFailure(error));
+  };
+}

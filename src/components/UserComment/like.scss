@@ -1,0 +1,32 @@
+.like {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+  &__value {
+    background-color: #ebf2d9;
+    border-radius: 3px;
+    padding: 2px 8px;
+    color: #94ab5b;
+    font-size: 13px;
+  }
+
+  &__check {
+    &:hover {
+      cursor: default;
+    }
+  }
+
+  &__uncheck {
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  img {
+    width: 15px;
+    height: 15px;
+    margin-left: 10px;
+  }
+}

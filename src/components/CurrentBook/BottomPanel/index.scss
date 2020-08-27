@@ -1,0 +1,13 @@
+.bottom-panel {
+  display: flex;
+  flex-direction: row;
+
+  &__statistic {
+    width: 17%;
+  }
+
+  &__comments {
+    width: 83%;
+    padding-right: 250px;
+  }
+}

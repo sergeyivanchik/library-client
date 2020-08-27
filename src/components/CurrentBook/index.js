@@ -6,17 +6,17 @@ import './index.scss';
 import Line from './Line';
 import Mark from './Mark';
 import Spinner from '../Spinner';
-import UserComment from '../UserComment';
-import AddCommentForm from '../AddCommentForm';
 import Rating from './Rating';
+import BottomPanel from './BottomPanel';
+
 
 import {
   getCurrentBookAsync,
   checkBookAsync,
-  getBookRatingAsync
+  getBooksRatingAsync
 } from '../../store/actions/books';
 import { checkAuthorizationAsync } from '../../store/actions/users';
-import { getCommentsByBookAsync } from '../../store/actions/comments';
+import { getCommentsByBookAsync, getCommentsLikesAsync } from '../../store/actions/comments';
 
 
 const CurrentBook = ({ match: { params : { bookId } } }) => {
@@ -25,21 +25,28 @@ const CurrentBook = ({ match: { params : { bookId } } }) => {
   const showSpinner = useSelector(store => store.spinner.show);
   const currentUser = useSelector(store => store.users.currentUser);
   const comments = useSelector(store => store.comments.comments);
-  const averageRating = useSelector(store => store.books.averageRating);
-  const userRating = useSelector(store => store.books.userRating);
+  const rates = useSelector(store => store.books.rates);
+
+  const ratesForCurrentBook = rates[bookId] || [];
+  const averageRating = !!ratesForCurrentBook?.length
+    ? (ratesForCurrentBook.reduce((acc, elem) => acc + elem.rate, 0) / ratesForCurrentBook.length).toFixed(1)
+    : 0;
+  const userRating = !!ratesForCurrentBook?.length &&
+    ratesForCurrentBook.find(elem => elem.user === currentUser?.id);
 
   useEffect(() => {
     if (currentUser?.id) {
       dispatch(checkBookAsync({ bookId, userId: currentUser?.id }));
-      dispatch(getBookRatingAsync({ userId: currentUser?.id, bookId }));
+      dispatch(getBooksRatingAsync());
     }
-  }, [currentUser?.id]);
+  }, [bookId, currentUser, dispatch]);
 
   useEffect(() => {
     dispatch(checkAuthorizationAsync());
     dispatch(getCurrentBookAsync(bookId));
     dispatch(getCommentsByBookAsync(bookId));
-  }, []);
+    dispatch(getCommentsLikesAsync(bookId));
+  }, [bookId, dispatch]);
 
   return (
     <div className="current-book">
@@ -67,7 +74,7 @@ const CurrentBook = ({ match: { params : { bookId } } }) => {
                     <Line title="Издательство" info={currentBook?.publisher}/>
                     <Line title="Средний рейтинг" info={averageRating}/>
                     <Rating
-                      userRating={userRating}
+                      userRating={userRating?.rate || 0}
                       bookId={bookId}
                       userId={currentUser?.id}
                     />
@@ -83,14 +90,12 @@ const CurrentBook = ({ match: { params : { bookId } } }) => {
                 <p className="current-book__story">{currentBook?.story}</p>
               </div>
 
-              <AddCommentForm bookId={bookId} user={currentUser}/>
-
-              {
-                !!comments?.length &&
-                comments.map(comment => {
-                  return <UserComment comment={comment} key={comment?.id}/>;
-                })
-              }
+              <BottomPanel
+                comments={comments}
+                bookId={bookId}
+                user={currentUser}
+                rates={rates}
+              />
             </>
       }
     </div>
